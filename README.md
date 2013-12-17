@@ -1,7 +1,11 @@
 # node-vw
 A node wrapper around `vowpal_wabbit`
 
-
+## Quickstart
+Install `vw` then...
+```
+$ node app.js
+```
 
 ## Endpoints
 
@@ -24,25 +28,23 @@ $ curl -X POST -d '{"features": {"x": 1, "y": 1.7}}' localhost:3000/predict
 #### `train`
 ```
 var socket = io.connect();
+
+# sending to the server
 socket.emit("train", {"x": 1, "y": 2}, "label": 0});
 socket.emit("train", {"x": 1, "y": 4}, "label": 1});
+# coming back from the server
+socket.on("train", function(data) {
+  console.log(data);
+});
 ```
 #### `predict`
 ```
 var socket = io.connect();
+# sending to the server
 socket.emit("predict", {"x": 1, "y": 2});
 socket.emit("predict", {"x": 1, "y": 4});
-```
-
-#### `training`
-```
-socket.on("training", function(data) {
-  console.log(data);
-});
-```
-#### `prediction`
-```
-socket.on("prediction", function(data) {
+# coming back from the server
+socket.on("predict", function(data) {
   console.log(data);
 });
 ```
