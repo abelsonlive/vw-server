@@ -1,0 +1,17 @@
+{
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.0",
+    "ejs": "*",
+    "lodash": "~2.4.1",
+    "colors": "~0.6.2",
+    "uuid": "~1.4.1",
+    "ws": "~0.4.31",
+    "socket.io": "~0.9.16"
+  }
+}
