@@ -3,20 +3,24 @@ var path = require('path')
   , fs = require('fs')
   , _ = require('lodash')
   , colors = require('colors')
-  , VW_PATH = path.join(__dirname, "../vowpal_wabbit", "vowpalwabbit", "vw");
+  , VW_PATH = path.join(__dirname, "../vowpal_wabbit", "vowpalwabbit", "vw")
+  , DEFAULT_PARAMS = [
+      "--adaptive",
+      "--normalized",
+      "-p", "/dev/stdout"
+    ];
 
 
-module.exports = function(fn, params, delim, log) {
-  params = params || [
-    "--adaptive",
-    "--normalized",
-    "cache_file", "cache",
-    "-p", "/dev/stdout"
-  ];
+module.exports = function(handleStdout, handleStderr, params, delim, log) {
+  params = params || DEFAULT_PARAMS;
+
   if (log==undefined) {
     log = true;
   }
   var vw = spawn(VW_PATH, params);
+
+  console.log("starting vw:");
+  console.log("\tvw ".red + params.join(" "));
 
   vw.on("error", function(err) {
     console.log(err);
@@ -27,11 +31,11 @@ module.exports = function(fn, params, delim, log) {
   });
 
   vw.stdout.on("data", function(data) {
-    fn(data);
+    handleStdout(data);
   });
 
   vw.stderr.on("data", function(data) {
-    fn(data);
+    handleStderr(data);
   });
 
   train = function(_id, features, label) {
@@ -44,7 +48,7 @@ module.exports = function(fn, params, delim, log) {
     if (log==true) {
       console.log(formatted.yellow)
     }
-    vw.stdin.write(formatted + delim);
+    vw.stdin.write(formatted + "\n");
   };
 
   predict = function(_id, features) {
@@ -55,7 +59,7 @@ module.exports = function(fn, params, delim, log) {
     if (log==true) {
       console.log(formatted.yellow)
     }
-    vw.stdin.write(formatted + delim);
+    vw.stdin.write(formatted + "\n");
   };
 
   return {
