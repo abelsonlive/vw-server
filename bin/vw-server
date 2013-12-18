@@ -1,3 +1,8 @@
 #!/usr/bin/env node
-require('coffee-script');
-require('../src/cli.coffee');
+var server = require('../src/server');
+var vw_params = process.argv.slice(2);
+if (vw_params.length==0) {
+  vw_params = null;
+}
+server(3000, vw_params);
+

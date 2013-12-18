@@ -6,13 +6,21 @@ var path = require('path')
   , VW_PATH = path.join(__dirname, "../vowpal_wabbit", "vowpalwabbit", "vw")
   , DEFAULT_PARAMS = [
       "--adaptive",
-      "--normalized",
-      "-p", "/dev/stdout"
+      "--normalized"
     ];
 
 
 module.exports = function(handleStdout, handleStderr, params, delim, log) {
   params = params || DEFAULT_PARAMS;
+  var pidx = params.indexOf("-p");
+  if (pidx > -1) {
+    params.splice(pidx);
+    if (pidx < params.length) {
+      params.splice(pidx);
+    }
+  }
+  params.push("-p");
+  params.push("/dev/stdout");
 
   if (log==undefined) {
     log = true;
