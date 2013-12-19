@@ -1,14 +1,50 @@
-# node-vw
-A node wrapper around `vowpal_wabbit`
+# vw-server
+A node wrapper around `vowpal_wabbit` that provides a more accessible server.
 
 ## Quickstart
-Install `vw` then...
+- [Install `vw`](https://github.com/JohnLangford/vowpal_wabbit/wiki/Tutorial)
+- Download vw-server: `$ git clone git@github.com:yhat/vw-server.git`
+- Install vw-server: `$ npm install -g`
+- Start the server!
 ```
-$ node app.js
+$ vw-server
+```
+
+## Data Structure
+- `features` - Data you're using to predict a label. Needs to be a key/value.
+The features are not order dependent (`vw` remembers the names), so be sure
+to maintain consistent feature names.
+- `label` - Result/Outcome you're trying to predict.
+
+### Training Data
+```
+{
+  "features": {
+    "x": 1,
+    "y": 2,
+    "z": 4
+  },
+  "label": 1
+}
+```
+
+### Prediction Data
+```
+{
+  "features": {
+    "x": 1,
+    "y": 2,
+    "z": 4
+  }
+}
 ```
 
 ## Endpoints
+There are 2 ways to interact with `vw-server`: REST and WebSockets. Both accept 
+the same basic data structure, so it's a matter of personal preference as to 
+which one you use.
 
+### REST
 #### `/train`
 ```
 $ curl -X POST -d '{"features": {"x": 1, "y": 2}, "label": 1 }' localhost:3000/train
@@ -23,8 +59,7 @@ $ curl -X POST -d '{"features": {"x": 0, "y": 1.5}}' localhost:3000/predict
 $ curl -X POST -d '{"features": {"x": 1, "y": 1.7}}' localhost:3000/predict
 ```
 
-## socket events
-
+### WebSockets
 #### `train`
 ```
 var socket = io.connect();

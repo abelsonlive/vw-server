@@ -53,6 +53,9 @@ module.exports = function(PORT, params) {
     }
   };
 
+  /*
+   *
+   */
   handleStderr = function(data) {
     console.log(data.toString().green);
   };
@@ -109,7 +112,7 @@ module.exports = function(PORT, params) {
     socket.on("train", function(data) {
       var _id = uuid.v4();
       callbacks[_id] = function(data) {
-        socket.emit("training", data);
+        socket.emit("train", data);
       };
       vw.train(_id, data.features, data.label);
     });
@@ -117,7 +120,7 @@ module.exports = function(PORT, params) {
     socket.on("predict", function(data) {
       var _id = uuid.v4();
       callbacks[_id] = function(data) {
-        socket.emit("prediction", data);
+        socket.emit("predict", data);
       };
       vw.predict(_id, data.features);
     });
