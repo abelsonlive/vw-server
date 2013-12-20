@@ -85,9 +85,20 @@ socket.on("predict", function(data) {
 ```
 
 ### Tuning `vw`
-You can pass parameter to `vw-server` the same as you would with `vw`.
+You can pass arguemnts to `vw-server` the same as you would with `vw`.
 
 ```
 $ vw-server --csoaa 3
+$ vw-server --adaptive
+```
+
+### Misc
+You can set the port by using an environment variable:
+```
+$ export PORT=5000
+$ vw-server
+# starting vw:
+#   vw --adaptive --normalized -p /dev/stdout
+# listening on port 5000
 ```
 
