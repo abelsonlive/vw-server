@@ -2,7 +2,7 @@
 var path = require('path')
   , server = require('../src/server');
 
-//require("shellshim").globalize();
+require("shellshim").globalize();
 
 var vw_params = process.argv.slice(2);
 if (vw_params.length==0) {
