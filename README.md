@@ -83,3 +83,11 @@ socket.on("predict", function(data) {
   console.log(data);
 });
 ```
+
+### Tuning `vw`
+You can pass parameter to `vw-server` the same as you would with `vw`.
+
+```
+$ vw-server --csoaa 3
+```
+

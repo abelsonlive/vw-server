@@ -1,8 +1,17 @@
 #!/usr/bin/env node
-var server = require('../src/server');
+var path = require('path')
+  , server = require('../src/server');
+
+require("shellshim").globalize();
+
 var vw_params = process.argv.slice(2);
 if (vw_params.length==0) {
   vw_params = null;
 }
-server(3000, vw_params);
+if (vw_params[0]=="--help") {
+  var cmd = path.join(__dirname, "vowpal_wabbit/vowpalwabbit/vw")
+  console.log($(cmd, "--help"));
+} else {
+  server(3000, vw_params);
+}
 
