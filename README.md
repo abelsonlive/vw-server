@@ -67,7 +67,7 @@ var socket = io.connect();
 # sending to the server
 socket.emit("train", {"x": 1, "y": 2}, "label": 0});
 socket.emit("train", {"x": 1, "y": 4}, "label": 1});
-# coming back from the server
+// coming back from the server
 socket.on("train", function(data) {
   console.log(data);
 });
@@ -75,10 +75,10 @@ socket.on("train", function(data) {
 #### `predict`
 ```javascript
 var socket = io.connect();
-# sending to the server
+// sending to the server
 socket.emit("predict", {"x": 1, "y": 2});
 socket.emit("predict", {"x": 1, "y": 4});
-# coming back from the server
+// coming back from the server
 socket.on("predict", function(data) {
   console.log(data);
 });
