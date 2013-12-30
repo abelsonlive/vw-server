@@ -46,8 +46,10 @@ module.exports = function(handleStdout, handleStderr, params, delim, log) {
     handleStderr(data);
   });
 
-  train = function(_id, features, label) {
+  train = function(_id, features, label, n) {
+    n = n || 1;
     // define the training label and the feature namespace
+    var formatted = label + " "  + n + " " + _id + "| ";
     var formatted = label + " " + _id + "| ";
     _.pairs(features).forEach(function(pair) {
       formatted += pair.join(":") + " ";

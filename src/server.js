@@ -15,7 +15,7 @@ module.exports = function(PORT, params) {
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.favicon());
-  app.use(express.logger('dev'));
+  //app.use(express.logger('dev'));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(express.cookieParser('your secret here'));
@@ -75,7 +75,7 @@ module.exports = function(PORT, params) {
     callbacks[_id] = function(data) {
       res.json(data);
     };
-    vw.train(_id, req.body.features, req.body.label);
+    vw.train(_id, req.body.features, req.body.label, req.body.n);
   });
 
   app.post('/predict', function(req, res) {
@@ -114,7 +114,7 @@ module.exports = function(PORT, params) {
       callbacks[_id] = function(data) {
         socket.emit("train", data);
       };
-      vw.train(_id, data.features, data.label);
+      vw.train(_id, data.features, data.label, data.n);
     });
 
     socket.on("predict", function(data) {
