@@ -93,19 +93,18 @@ module.exports = function(PORT, params) {
   });
 
 
-  /*
-  var wss = new WebSocketServer({server: server});
-  wss.on('connection', function(ws) {
-    ws.on('message', function(data) {
-      data = JSON.parse(data);
-      var _id = uuid.v4();
-      callbacks[_id] = function(data) {
-        ws.send(JSON.stringify(data));
-      };
-      vw.predict(_id, data.features);
-    });
-  });
-  */
+  // var wss = new WebSocketServer({server: server});
+  // wss.on('connection', function(ws) {
+  //   ws.on('message', function(data) {
+  //     data = JSON.parse(data);
+  //     var _id = uuid.v4();
+  //     callbacks[_id] = function(data) {
+  //       ws.send(JSON.stringify(data));
+  //     };
+  //     vw.predict(_id, data.features);
+  //   });
+  // });
+  
   var io = require('socket.io').listen(server, { log: false });
   io.sockets.on('connection', function (socket) {
 
