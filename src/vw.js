@@ -3,7 +3,7 @@ var path = require('path')
   , fs = require('fs')
   , _ = require('lodash')
   , colors = require('colors')
-  , VW_PATH = path.join(__dirname, "../vowpal_wabbit", "vowpalwabbit", "vw")
+  , VW_PATH = process.env['VW_SERVER_PATH'] || "/usr/local/bin/vw"
   , DEFAULT_PARAMS = [
       "--adaptive",
       "--normalized"
